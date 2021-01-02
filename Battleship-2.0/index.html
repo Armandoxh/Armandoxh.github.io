@@ -30,14 +30,33 @@
 
 <body>
 
-    <main class="d-flex flex-column align-items-center" >
+    <main id = "main" class="d-flex flex-column align-items-center" >
+        <!-- w3 Schools-->
+       
+
+
         <div class="d-flex">
-        <div id = "fleetLocation" class="container">
-              
+
+            
+            <div id = "hitLocation" class="container"> 
+                <h4>Where to strike next, captain?</h4>  
+
+            </div>
+            <div id = "shipLocation "class = "container">
+                <div class="row">
+                    
+                  </div>
             </div>
           </div>
+         
         </div>
     </main>
+
+    <form id="frm1" action="/action_page.php">
+        <h3> Choose a tile to attack</h3>
+        <input type="text" name="fname"><br>
+        <input type="button" id = "btnStrike" class="btn btn-danger" value="Strike">
+      </form>
 </body>
 
 </html>
