@@ -30,33 +30,78 @@
 
 <body>
 
-    <main id = "main" class="d-flex flex-column align-items-center" >
+    <main id = "main" class="d-flex flex-column" >
         <!-- w3 Schools-->
        
+        <!-- https://mdbootstrap.com/docs/standard/components/cards/
+        I used their code for cards in a row but modified it.-->
+        <div class="row border">
+            <div class="col-sm-4">
+              <div id = "card" class="card border">
+                <div class="card-body">
+                  <h5 class="card-title">X2 Damage</h5>
+                  <p class="card-text">
+                    Hit 3 squares in a line on your next move. 
+                  </p>
+                  <a href="#" class="btn btn-primary">Use Card</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+                <div id = "card" class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Protection</h5>
+                    <p class="card-text">
+                      Protect all of your ships during the next move. 
+                    </p>
+                    <a href="#" class="btn btn-primary">Use Card</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div id = "card" class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Double Fragments</h5>
+                    <p class="card-text">
+                      Earn Double Fragments during your next HIT!
+                    </p>
+                    <a href="#" class="btn btn-primary">Use Card</a>
+                  </div>
+                </div>
+              </div>
+          </div>
+          </div>
+        <form id="frm1" action="/action_page.php">
+            <h3> Choose a tile to attack   </h3>
+            <input type="text" name="fname"><br>
+            <input type="button" id = "btnStrike" class="btn btn-danger" value="Strike">
+          </form>
+          
+         
+          </div>
 
-
-        <div class="d-flex">
+        <div id = "gamedisplays" class="d-flex">
 
             
             <div id = "hitLocation" class="container"> 
                 <h4>Where to strike next, captain?</h4>  
 
             </div>
-            <div id = "shipLocation "class = "container">
-                <div class="row">
-                    
-                  </div>
+            <div id = "shipLocation" class = "container">
+                <h4>Where to strike next, captain?</h4> 
+            </div>
+           
+            <div>
+                
+
+            </div>
             </div>
           </div>
          
         </div>
     </main>
 
-    <form id="frm1" action="/action_page.php">
-        <h3> Choose a tile to attack</h3>
-        <input type="text" name="fname"><br>
-        <input type="button" id = "btnStrike" class="btn btn-danger" value="Strike">
-      </form>
+    
 </body>
 
 </html>
