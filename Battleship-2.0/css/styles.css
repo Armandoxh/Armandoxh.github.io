@@ -13,6 +13,13 @@
     background-color: green;
     
 }
+#hitLocation{
+    display: none;
+}
+.example{
+    display: none;
+}
+
 #card{
     text-align: center;
 }
@@ -31,8 +38,8 @@
     /* justify-content: space-between;
    x
    
-   
+}
     display: inline;
 } */
-
+}
 

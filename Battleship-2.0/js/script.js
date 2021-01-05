@@ -2,7 +2,11 @@ const gameRatioX = 5;
 const gameRatioY = 5;
 const $hitLocation = $('#hitLocation');
 const $shipLocation= $('#shipLocation');
+$('.example').show()
 console.log($shipLocation)
+
+// $shipLocation.hide();
+// $hitLocation.hide();
 
 
 const playerBoard = {
