@@ -13,12 +13,12 @@
     background-color: green;
     
 }
-#hitLocation{
-    display: none;
+/* #hitLocation{
+    display: inline;
 }
 .example{
     display: none;
-}
+} */
 
 #card{
     text-align: center;
@@ -27,14 +27,25 @@
 #cards{
     display: inline-block;
 }
+#hitLocation{
+    width:250px;
+    max-width: 250px;
+    margin:auto;
+    margin-right: 150px;
+    height: 40px;
+     width:250px;
+    background-color: "blue"
+
+}
+
 #gamedisplays{
-    width: 1000px;
-    align-content: center;
-    top: 50%;
-    left: 15%;
-    /* transform: translate(-50%, -50%); */
     
-    position: relative;
+    align-content: space-between;
+    /* top: 50%;
+    left: 15%; */
+    /* transform: translate(-50%, -50%); */
+    /* position:center; */
+    /* position: relative; */
     /* justify-content: space-between;
    x
    

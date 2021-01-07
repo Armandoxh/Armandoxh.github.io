@@ -35,7 +35,55 @@
        
         <!-- https://mdbootstrap.com/docs/standard/components/cards/
         I used their code for cards in a row but modified it.-->
-        <div class="row border">
+        
+
+          <!-- W3 Schools
+        <form id="frm1" action="/action_page.php">
+            <h3> Choose a tile to attack   </h3>
+            <input type="text" name="fname"><br>
+            <input type="button" id = "btnStrike" class="btn btn-danger" value="Strike">
+          </form> -->
+          
+          </div>
+
+        <div id = "gamedisplays" class="d-flex w-auto p-3">
+
+            <!-- hide
+            something else will go here with append()-->
+
+
+            <div id = "hitLocation" class="container"> 
+                <h4>Where to strike next, captain?</h4>  
+
+            </div>
+            <div id = "ships" class = "ships" style = "height:400px ; width: 600px;">
+                <h4>
+                    # : Ship (Squares) 
+                     <button > Start </button>
+                    <h6>Press R to Rotate Ship</h6>
+                    <ul class = "shipSelector">
+                        <!-- data element-->
+                        <li> 3 : Cruiser (2) <button id = "cruiser" data-value="2"> Place (3) </button></li> 
+                        <li> 1 : Battleship(4) <button id = "battleship" data-value="4"> Place(1) </button></li> 
+                        <li> 2 : Submarine (3) <button id = "submarine" data-value="3" > Place(2) </button></li>
+                        <li> 1 : Aircraft Carrier (5) <button id = aircraftcarrier data-value="5"> Place (1) </button> </li>
+                    </ul>
+                </h4>
+            </div>
+            <div id = "shipLocation" class = "container">
+                <h4 style = "text-align: center;">Our Fleet ! </h4> 
+            </div>
+
+            
+           
+            <div>
+                
+
+            </div>
+            </div>
+          </div>
+          <div class="row border">
+            <h1> Empower your next move </h1>
             <div class="col-sm-4">
               <div id = "card" class="card border">
                 <div class="card-body">
@@ -71,37 +119,6 @@
               </div>
           </div>
           </div>
-
-          <!-- W3 Schools -->
-        <form id="frm1" action="/action_page.php">
-            <h3> Choose a tile to attack   </h3>
-            <input type="text" name="fname"><br>
-            <input type="button" id = "btnStrike" class="btn btn-danger" value="Strike">
-          </form>
-          
-          </div>
-
-        <div id = "gamedisplays" class="d-flex">
-
-            <!-- hide
-            something else will go here with append()-->
-
-            <div class = "example"> Test </div>
-            <div id = "hitLocation" class="container"> 
-                <h4>Where to strike next, captain?</h4>  
-
-            </div>
-            <div id = "shipLocation" class = "container">
-                <h4 style = "text-align: center;">Our Fleet ! </h4> 
-            </div>
-           
-            <div>
-                
-
-            </div>
-            </div>
-          </div>
-         
         </div>
     </main>
 

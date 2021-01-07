@@ -26,8 +26,7 @@ let offset =0;
 const Ships = {
     cruiser: {
         health: [1,1] ,
-        startPos,
-        endPos
+        
     },
  
     submarine: {
@@ -224,8 +223,7 @@ let counter2 = 0;
         /**
          * Must change cols to match gameratios "row-cols-X" when the game gets larger
          */
-        $hitLocation.append(`<div id = "row${i}" class="row row-cols-10 border" style="height: 40px; width:250px;
-        background-color: "blue"); ">
+        $hitLocation.append(`<div id = "row${i}" class="row row-cols-10 border"  ">
         `)
         $currentRow = $hitLocation.find('#row'+ i);
         
