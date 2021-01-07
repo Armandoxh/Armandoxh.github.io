@@ -13,6 +13,10 @@
     background-color: green;
     
 }
+#invalidShipPlacement{
+    display: none;
+    font-weight: 800;
+}
 /* #hitLocation{
     display: inline;
 }
@@ -32,9 +36,7 @@
     max-width: 250px;
     margin:auto;
     margin-right: 150px;
-    height: 40px;
-     width:250px;
-    background-color: "blue"
+   
 
 }
 

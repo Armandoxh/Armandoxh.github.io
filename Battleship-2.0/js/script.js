@@ -10,10 +10,28 @@ const $btnBattleShipAdd = $('#battleship')
 const $btnSubmarineAdd = $('#submarine')
 const $btnAircraftCarrierAdd = $('#aircraftcarrier')
 
+const $shipPlacementError = $("#invalidShipPlacement")
 
 let rotated = false; 
 let currentShip = null;
 let offset =0;
+
+const attackOptions =[
+    clicksAvailalable = 1,
+    clickOffset = 0,
+    shipsProtected = false, 
+    doubleFragments =false,
+    diceRoll = false
+]
+
+$hitLocation.on('click', function(e){
+
+    $this = $(this)
+    console.log(e.target.id)
+    console.log(e.target)
+
+
+})
 
 // const buttons = [2,3,4,5]
 // buttons.forEach(button => {
@@ -163,14 +181,25 @@ $shipLocation
     // $This.find(`#${nextTo}`).css("background-color" ,"blue")
 }) 
 .on('click', function(e){
-    const $this = $(this);
-    let currentTile = 0;
 
-    for (let index = 0; index < offset; index++) {
-        let temp = parseInt(e.target.id)+index;
-        $this.find((`#${temp}`))
-    }
+    let shipLocations ;
+    const $this = $(this);
+    let currentTile = parseInt(e.target.id)
+    let lastTile = parseInt(e.target.id) + offset-1
     
+
+    
+    if((lastTile%5===0)){
+        console.log ("edge case")
+        $shipPlacementError.hide();
+
+    } else if(((currentTile % gameRatioY) > (lastTile % gameRatioY)) || (currentTile%5===0) ){
+        $shipPlacementError.show();
+        
+    } else {
+        console.log("ok")
+    }
+
 });
 
 
@@ -223,7 +252,8 @@ let counter2 = 0;
         /**
          * Must change cols to match gameratios "row-cols-X" when the game gets larger
          */
-        $hitLocation.append(`<div id = "row${i}" class="row row-cols-10 border"  ">
+        $hitLocation.append(`<div id = "row${i}" class="row row-cols-10 border" style="height: 40px; width:250px;
+        background-color: "blue"); ">
         `)
         $currentRow = $hitLocation.find('#row'+ i);
         
