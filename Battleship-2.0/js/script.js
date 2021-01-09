@@ -185,6 +185,7 @@ function attackHuman (){
             let nextind = rand+1
             console.log("enemy carpet bomb")
             $("#card-info").text(`GET CARPET BOMBED `)
+            
             if(playerBoard[nextind]>0){
                 playerBoard[nextind]--
                 enemyHitTracker[nextind] =1
@@ -262,20 +263,28 @@ const attackComputer = function(e){
 
     if((playerAttackOptions[1]=== true) && (!hitTracker.includes(missleDropLocation+1))) {
       
+        
         playerAttackOptions[1]=false;
         if(enemyBoard[missleDropLocation+1]>0){
             hitTracker.push(missleDropLocation+1)
+            $hitLocation.find(`#${missleDropLocation+1}`).css({"background-color":"green"});    
+            enemyBoard[missleDropLocation+1]--
+        } else {
+            $hitLocation.find(`#${missleDropLocation+1}`).css({"background-color":"red"}); 
         }
-        $hitLocation.find(`#${missleDropLocation+1}`).css({"background-color":"green"});    
-        enemyBoard[missleDropLocation+1]--
+       
 
         if(enemyBoard[missleDropLocation-1]>0){
             hitTracker.push(missleDropLocation-1)
-           
-        }
-        $hitLocation.find(`#${missleDropLocation-1}`).css({"background-color":"green"});
+            $hitLocation.find(`#${missleDropLocation-1}`).css({"background-color":"green"});
             
         enemyBoard[missleDropLocation-1]--
+        }
+        else{
+            $hitLocation.find(`#${missleDropLocation-1}`).css({"background-color":"red"});
+
+        }
+       
     }
   
     if((playerAttackOptions[3]===true) && (!hitTracker.includes(missleDropLocation))){
