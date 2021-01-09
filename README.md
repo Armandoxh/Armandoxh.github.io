@@ -10,6 +10,8 @@ An adapted version of Hasbro's popular game "Battleship". Players who played the
     - Bootstrap
     - JQuery
     - JavaScript
+    - Stackoverflow
+    
 
 ## Approach: 
 First, a standard battleship game will need to be built. This consists of two 5x10 and the players will have the option to place their ships on any row or column on their field. There are 6 ships with varying lengths spanning from 2 to 5.  Players then take turns choosing a square at random on the opponent's grid to choose to shoot a missile at. If the player hits an enemy ship one time on each square it takes up on the grid, the ship is destroyed. Players take turns until one player loses all of their ships. 
@@ -20,8 +22,18 @@ The twist: Players will begin their turn with 3 action - cards (see above). Thes
 programming a computer to play against
 keeping track of what dom element does what
 
+## HOW TO START
+Place your ships
+click on a tile on the "attacking" grid on the left side to start gameplay.
+
+
+
 Known Bugs: 
 
-clicking to fast when choosing the tile to place the missile on causes a memory leak and will break the game
+Do not hover over your ships when you are in the "attacking phase." It causes the tiles to reset.
+clicking to fast when choosing the tile to place the missile on causes a memory leak and will break the game. You have to click slowly
 clicking in between divs will sometimes cause the same memory leak 
 mouseover is not removed after all ships are placed and unhighlights them if they were selected to be "attacked" by the computer
+
+Clicking on a div can sometimes ruin the game placement of ships on the front end but not the back end and a refresh is required
+enemy "proximity mine" is not working properly so was removed 

@@ -51,6 +51,7 @@ const computerAttackOptions = [
     shipsProtected = false, 
     proximityMine = false
 ]
+let boostSelected = false;
 
 // ___________computer data___________
 // let enemyBoard = [];
@@ -73,19 +74,29 @@ function actionCardHandler(e){
     $this = $(this)
     
     
-    console.log(jQuery(this).attr("id"))
     
-    if(clicked === "actioncard1"){
+    console.log(jQuery(this).attr("id"))
+    console.log(boostSelected)
+    
+    
+    if((clicked === "actioncard1")){
         playerAttackOptions[1] = true;
         console.log(playerAttackOptions[1])
-    } else if (clicked === "actioncard2"){
+        $("#card-info").text(`CARPET BOOOOOMB`)
+        boostSelected = true
+    } else if ((clicked === "actioncard2") ){
         console.log(playerAttackOptions[2])
         playerAttackOptions[2] = true;
         console.log(playerAttackOptions[2])
-    } else if (clicked === "actioncard3"){
+        boostSelected = true;
+        $("#card-info").text(`You are Protected This Turn!`)
+    } else if (((clicked === "actioncard3") )){
         playerAttackOptions[3] = true;
+        $("#card-info").text(`It'd be a shame if you missed now`)
         console.log(playerAttackOptions[3])
+        boostSelected = true;
     }
+
 
     
     // if(($this.find(".card-title").text)==="proximityMine"){
@@ -158,9 +169,50 @@ function findNotUsed(){
 }
 let hitsrendered=0
 function attackHuman (){
-    rand = findNotUsed();
-    
+    let rand = findNotUsed();
+
+    if(playerAttackOptions[2] ===true){
+        hitsrendered +=2
+
+        
+        playerAttackOptions[2]=false;
+        boostSelected = false;
+    }
+  
     for( hitsrendered; hitsrendered<hitsAvailalable;hitsrendered++){
+
+        if((randomNumber(0,100)) < 40){
+            let nextind = rand+1
+            console.log("enemy carpet bomb")
+            $("#card-info").text(`GET CARPET BOMBED `)
+            if(playerBoard[nextind]>0){
+                playerBoard[nextind]--
+                enemyHitTracker[nextind] =1
+                $shipLocation.find(`#${nextind}`).css("background-color" ,"red")
+                hitsrendered++
+            }
+            else{
+                $shipLocation.find(`#${nextind}`).css("background-color" ,"orange")
+                enemyHitTracker[nextind]=1
+                hitsrendered++
+            }
+            let prevind = rand-1
+            if(playerBoard[prevind]>0){
+                playerBoard[prevind]--
+                enemyHitTracker[prevind] =1
+                $shipLocation.find(`#${prevind}`).css("background-color" ,"red")
+                console.log($shipLocation.find(`#${prevind}`))
+                hitsrendered++
+            } else {
+                $shipLocation.find(`#${prevind}`).css("background-color" ,"orange")
+                enemyHitTracker[prevind]=1
+                hitsrendered++
+            }
+        } else {
+            if((randomNumber(0,100) < 60) &&  (randomNumber(0,100) > 40)){
+                computerAttackOptions[2] = true;
+            }
+        }
         console.log("Hits rendered" + hitsrendered)
         
         
@@ -183,6 +235,7 @@ function attackHuman (){
         hitsrendered=0;
     
     console.log("Computer Hits Rendered, Avail " + hitsrendered+ " " + hitsAvailalable)
+    
     play(1)
 }
     // }
@@ -194,6 +247,8 @@ function attackHuman (){
 
 let clicksrendered=0;
 const attackComputer = function(e){
+
+    $("#card-info").text(``)
     let missleDropLocation = parseInt(e.target.id)
     $this = $(this)
 
@@ -205,6 +260,7 @@ const attackComputer = function(e){
     }
 
     if((playerAttackOptions[1]=== true) && (!hitTracker.includes(missleDropLocation+1))) {
+      
         playerAttackOptions[1]=false;
         if(enemyBoard[missleDropLocation+1]>0){
             hitTracker.push(missleDropLocation+1)
@@ -270,6 +326,7 @@ const attackComputer = function(e){
 
         
     }
+    
     play(-1)
     
 };
@@ -308,6 +365,7 @@ function play(whosturn){
         if(whosturn<0) {
             
             attackHuman();
+            console.log(boostSelected)
         
     }
    
