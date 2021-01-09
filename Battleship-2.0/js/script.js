@@ -139,7 +139,8 @@ $shipLocation
                 break;
             
     };
-    $this.find(`#${e.target.id}`).css("background-color" ,"#6EFA2C")    
+    $this.find(`#${e.target.id}`).css("background-color" ,"#6EFA2C") 
+       
 })
 .on('mouseout', function(e){
     const $This = $(this)
@@ -173,12 +174,9 @@ $shipLocation
             $This.find(`#${nextFour}`).css("background-color" ,"blue")
             nextFive = parseInt(e.target.id)+ offset-4;
             $This.find(`#${nextFive}`).css("background-color" ,"blue")
-            break;
-        
-};
-    $This.find(`#${e.target.id}`).css("background-color" ,"blue")
-    
-    // $This.find(`#${nextTo}`).css("background-color" ,"blue")
+            break;            
+}
+$This.find(`#${e.target.id}`).css("background-color" ,"blue")   
 }) 
 .on('click', function(e){
 
@@ -190,7 +188,6 @@ $shipLocation
 
     
     if((lastTile%5===0)){
-        console.log ("edge case")
         $shipPlacementError.hide();
 
     } else if(((currentTile % gameRatioY) > (lastTile % gameRatioY)) || (currentTile%5===0) ){
@@ -198,6 +195,14 @@ $shipLocation
         
     } else {
         console.log("ok")
+    }
+
+    
+    let count=0
+    while(count<offset){
+        $this.unbind('mouseover').unbind('mouseout')
+        console.log("hello")
+        count++;
     }
 
 });
