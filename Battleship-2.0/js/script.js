@@ -13,8 +13,8 @@ const $actioncard1 = $("#actioncard1")
 const $actioncard2 = $("#actioncard2")
 const $actioncard3 = $("#actioncard3")
 
-$('#main').css('background-image', 'url("https://www10.lunapic.com/do-not-link-here-use-hosting-instead/16101910443455714?6166146")');
-$('#body').css('opacity', "50%");
+$('#main').css('background-image', 'url("https://thumbs.dreamstime.com/b/white-wood-wall-texture-background-panels-graphic-resources-149622903.jpg")');
+$('#body').css('opacity', "70%");
 
 
 // ___________player data__________
@@ -223,7 +223,7 @@ function attackHuman (){
         console.log("Hits rendered" + hitsrendered)
         
         
-        if(playerBoard.board[rand-1]>0){
+        if(playerBoard.board[rand]>0){
             console.log("else if")
             playerBoard.board[rand]--;
             enemyHitTracker[rand]=1
