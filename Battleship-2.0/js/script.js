@@ -170,7 +170,7 @@ function findNotUsed(){
 let hitsrendered=0
 function attackHuman (){
     let rand = findNotUsed();
-
+    console.log(rand)
     if(playerAttackOptions[2] ===true){
         hitsrendered +=2
 
@@ -181,40 +181,45 @@ function attackHuman (){
   
     for( hitsrendered; hitsrendered<hitsAvailalable;hitsrendered++){
 
-        if((randomNumber(0,100)) < 40){
-            let nextind = rand+1
-            console.log("enemy carpet bomb")
-            $("#card-info").text(`GET CARPET BOMBED `)
+        // if((randomNumber(0,100)) < 40){
+        //     let nextind = rand+1
+        //     console.log(nextind)
+        //     console.log("enemy carpet bomb")
+        //     $("#card-info").text(`GET CARPET BOMBED `)
+        //     console.log("hello")
+        //     let prevind = rand-1;
+        //     console.log(prevind + " " + "prevind")
+        //     if(playerBoard.board[nextind]>0){
+        //         playerBoard.board[nextind]--
+        //         enemyHitTracker[nextind] =1
+        //         $shipLocation.find(`#${nextind}`).css("background-color" ,"red")
+        //         hitsrendered++
+        //     }
+        //     else{
+        //         $shipLocation.find(`#${nextind}`).css("background-color" ,"orange")
+        //         enemyHitTracker[nextind]=1
+        //         hitsrendered++
+        //     }
             
-            if(playerBoard[nextind]>0){
-                playerBoard[nextind]--
-                enemyHitTracker[nextind] =1
-                $shipLocation.find(`#${nextind}`).css("background-color" ,"red")
-                hitsrendered++
-            }
-            else{
-                $shipLocation.find(`#${nextind}`).css("background-color" ,"orange")
-                enemyHitTracker[nextind]=1
-                hitsrendered++
-            }
-            let prevind = rand-1
-            if(playerBoard[prevind]>0){
-                playerBoard[prevind]--
-                enemyHitTracker[prevind] =1
-                $shipLocation.find(`#${prevind}`).css("background-color" ,"red")
-                console.log($shipLocation.find(`#${prevind}`))
-                hitsrendered++
-            } else {
-                $shipLocation.find(`#${prevind}`).css("background-color" ,"orange")
-                enemyHitTracker[prevind]=1
-                hitsrendered++
-            }
-        } else {
+            
+        //     if(playerBoard.board[prevind]>0){
+        //         playerBoard.board[prevind]--
+        //         console.log(playerBoard.board[prevind]+ " prev index")
+        //         enemyHitTracker[prevind] =1
+        //         $shipLocation.find(`#${prevind}`).css("background-color" ,"red")
+        //         console.log($shipLocation.find(`#${prevind}`))
+        //         hitsrendered++
+        //     } else {
+        //         $shipLocation.find(`#${prevind}`).css("background-color" ,"orange")
+        //         enemyHitTracker[prevind]=1
+        //         hitsrendered++
+        //     }
+        // } else {
             if((randomNumber(0,100) < 60) &&  (randomNumber(0,100) > 40)){
                 computerAttackOptions[2] = true;
                 $("#card-info").text(`Enemy is protected `)
             }
-        }
+        
         console.log("Hits rendered" + hitsrendered)
         
         
@@ -240,6 +245,9 @@ function attackHuman (){
     
     play(1)
 }
+
+
+
     // }
 
         
@@ -494,7 +502,9 @@ let counter2 = 0;
                 counter2++;
                 $currentRow.append(`<div id = "${counter2}" class="col border-end border-top "> ${counter2} </div>`)
                 playerBoard.board.push(0)
-                playerBoard.board[counter2-1]= 0;
+                console.log(counter2)
+                // playerBoard.board[counter2]= 0;
+                console.log(playerBoard.board)
             }
     }
     counter2 = 0; 
@@ -594,9 +604,11 @@ $shipLocation.find(`#row${i}`).on('mouseout',"*", function(e){
 
 
     function place(pos, offset){
-        let j = pos; 
+        let j = pos-1; 
       for (let i = 0; i < offset; i++) {
+          console.log(j)
          playerBoard.board[j] = 1;
+         console.log(playerBoard)
          j++;   
       } 
     }
