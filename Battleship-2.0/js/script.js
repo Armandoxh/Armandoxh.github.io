@@ -9,12 +9,25 @@ const $btnBattleShipAdd = $('#battleship')
 const $btnSubmarineAdd = $('#submarine')
 const $btnAircraftCarrierAdd = $('#aircraftcarrier')
 const $shipPlacementError = $("#invalidShipPlacement")
+const $actioncard1 = $("#actioncard1")
+const $actioncard2 = $("#actioncard2")
+const $actioncard3 = $("#actioncard3")
+
+$('#main').css('background-image', 'url("https://www10.lunapic.com/do-not-link-here-use-hosting-instead/16101910443455714?6166146")');
+$('#body').css('opacity', "50%");
+
 
 // ___________player data__________
+hitCount=0;
+if(hitCount>=2){
+    hitCount=0;
+}
 let shipCount = [0,0,3,2,1,1]
 let rotated = false; 
 let currentShip = null;
+let cardActivated = false; 
 let offset =0;
+let playerCards = ["proximityMine", "protection", "carpetbomb"];
 let hitTracker = [];
 let playerBoard = {
     board : []
@@ -22,25 +35,28 @@ let playerBoard = {
 
 //__________game data_____________
 let turn =1;
+let winner ="";
 
 //________action card data________
+const actioncards = ["proximityMine", "carpetbomb", "protection"]
 const playerAttackOptions =[
     clicksAvailalable = 1,
-    carpetBomb = 0,
-    shipsProtected = false, 
-    diceRoll = false
+    carpetBomb = false,
+    shipsProtected = false,
+    proximityMine = false
 ]
 const computerAttackOptions = [
-    clicksAvailalable = 1,
-    carpetBomb = 0,
+    hitsAvailalable = 1,
+    carpetBomb = false,
     shipsProtected = false, 
-    diceRoll = false
+    proximityMine = false
 ]
 
 // ___________computer data___________
 // let enemyBoard = [];
+hitCount=0;
 let enemyHitTracker = [];
-let enemyCards = [];
+let enemyCards = ["proximityMine", "carpet_bomb", "protection"];
 let enemyShipCount = [3,2,2,1]
 
 
@@ -48,6 +64,46 @@ let enemyShipCount = [3,2,2,1]
 const enemyBoard = [0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
 
 
+function actionCardHandler(e){
+    if ( cardActivated = false){
+        cardActivated = true;
+    }  
+    let clicked = jQuery(this).attr("id").toString();
+    
+    $this = $(this)
+    
+    
+    console.log(jQuery(this).attr("id"))
+    
+    if(clicked === "actioncard1"){
+        playerAttackOptions[1] = true;
+        console.log(playerAttackOptions[1])
+    } else if (clicked === "actioncard2"){
+        console.log(playerAttackOptions[2])
+        playerAttackOptions[2] = true;
+        console.log(playerAttackOptions[2])
+    } else if (clicked === "actioncard3"){
+        playerAttackOptions[3] = true;
+        console.log(playerAttackOptions[3])
+    }
+
+    
+    // if(($this.find(".card-title").text)==="proximityMine"){
+    //     proximityMine = true;
+    //     console.log("hello world")
+    // }
+    // if(($this.find(".card-title").text)==="Protection"){
+    //     console.log("protection")
+    // }
+
+}
+
+// $cardsButtons = $('#cardsbuttons')
+// $cardsButtons.on('click',"*",actionCardHandler)
+// console.log($cardsButtons)
+$actioncard1.on('click', actionCardHandler)
+$actioncard2.on('click', actionCardHandler)
+$actioncard3.on('click',actionCardHandler)
 
 function generateComputerdata  (){
     let placedCoordinates = []
@@ -89,51 +145,180 @@ function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
+generateComputerdata();
+
+function findNotUsed(){
+    rand = randomNumber(0,50)
+    if(enemyHitTracker[rand]>0){
+       return findNotUsed()
+    }else {
+
+     return rand;
+    }
+}
+let hitsrendered=0
+function attackHuman (){
+    rand = findNotUsed();
+    
+    for( hitsrendered; hitsrendered<hitsAvailalable;hitsrendered++){
+        console.log("Hits rendered" + hitsrendered)
+        
+        
+        if(playerBoard.board[rand]>0){
+            console.log("else if")
+            playerBoard.board[rand]--;
+            enemyHitTracker[rand]=1
+            $shipLocation.find(`#${rand}`).css("background-color" ,"red")
+            hitsrendered++;
+            hitCount++;
+            
+        } else {
+            console.log("else")
+            $shipLocation.find(`#${rand}`).css("background-color" ,"orange")
+            enemyHitTracker[rand]=1
+            hitsrendered++;
+            hitCount++
+        }
+    }
+        hitsrendered=0;
+    
+    console.log("Computer Hits Rendered, Avail " + hitsrendered+ " " + hitsAvailalable)
+    play(1)
+}
+    // }
+
+        
+
+// }
+
 
 let clicksrendered=0;
 const attackComputer = function(e){
-    
-    
     let missleDropLocation = parseInt(e.target.id)
     $this = $(this)
-    console.log(e.target.id)
+
+    if(computerAttackOptions[2]===true){
+        clicksrendered++;
+
+        computerAttackOptions[2]=false;
+
+    }
+
+    if((playerAttackOptions[1]=== true) && (!hitTracker.includes(missleDropLocation+1))) {
+        playerAttackOptions[1]=false;
+        if(enemyBoard[missleDropLocation+1]>0){
+            hitTracker.push(missleDropLocation+1)
+        }
+        $hitLocation.find(`#${missleDropLocation+1}`).css({"background-color":"green"});    
+        enemyBoard[missleDropLocation+1]--
+
+        if(enemyBoard[missleDropLocation-1]>0){
+            hitTracker.push(missleDropLocation-1)
+           
+        }
+        $hitLocation.find(`#${missleDropLocation-1}`).css({"background-color":"green"});
+            
+        enemyBoard[missleDropLocation-1]--
+    }
+  
+    if((playerAttackOptions[3]===true) && (!hitTracker.includes(missleDropLocation))){
+        playerAttackOptions[3] = false;
+        
+        if(enemyBoard[missleDropLocation]>0){
+            hitTracker.push(missleDropLocation)
+            $hitLocation.find(`#${missleDropLocation}`).css({"background-color":"green"});    
+            enemyBoard[missleDropLocation]--
+        }
+       
+            if(enemyBoard[missleDropLocation+5]>0){
+                hitTracker.push(missleDropLocation+5)
+                $hitLocation.find(`#${missleDropLocation+5}`).css({"background-color":"green"});    
+                enemyBoard[missleDropLocation]--
+        } else  if(enemyBoard[missleDropLocation-5]>0){
+            hitTracker.push(missleDropLocation-5)
+            $hitLocation.find(`#${missleDropLocation-5}`).css({"background-color":"green"});    
+            enemyBoard[missleDropLocation]--
+    } else if(enemyBoard[missleDropLocation+1]>0){
+        hitTracker.push(missleDropLocation+1)
+        $hitLocation.find(`#${missleDropLocation+1}`).css({"background-color":"green"});    
+        enemyBoard[missleDropLocation]--
+}
+
+    clicksrendered++;
+    }
     // while(clicksrendered< playerAttackOptions.clicksAvailalable){
         
-    if(clicksrendered>=1){
-        console.log(clicksAvailalable+ " " + clicksrendered)
-        turn*=-1
+    if(clicksrendered>=clicksAvailalable){
+        console.log("Player clicks avail, rendered " + clicksAvailalable+ " " + clicksrendered)
         $hitLocation.unbind('click')
         clicksrendered=0;
-        return
     }
 
     if(!hitTracker.includes(missleDropLocation)){
         clicksrendered++;
         hitTracker.push(missleDropLocation);
-        console.log(clicksrendered , clicksAvailalable)
 
         if(enemyBoard[missleDropLocation] > 0 ){
-            $hitLocation.find(`#${missleDropLocation}`).css({"background-color":"red"});
+            $hitLocation.find(`#${missleDropLocation}`).css({"background-color":"green"});
             enemyBoard[missleDropLocation]--;
+            hitsrendered++
+           
+        } else{
+            $hitLocation.find(`#${missleDropLocation}`).css({"background-color":"red"});
+           hitsrendered++;
         }
 
-        if(checkSum(enemyBoard)<=0){
-            console.log(checkSum(enemyBoard))
-        }
+        
     }
+    play(-1)
     
 };
 
-
-function play(){
-    if(turn>0){
-        $hitLocation.on('click',"*", attackComputer)
+function checkWinner(){
+    if ((checkSum(playerBoard.board))===0){
+        winner = "computer"
+       
+        alert("COMPUTER WINS")
     }
-    else {
-        console.log("no")
+    if ((checkSum(enemyBoard))===0){
+       alert(("PLAYER WINS"))
+        winner = "player"
     }
 }
-play();
+//put this after the player paces their ships
+
+function play(whosturn){
+ checkWinner();
+    if(winner != ""){
+        console.log(winner)
+        return
+    }
+    let i=0;
+  
+     
+
+    //    checkWinner()
+    //    console.log(winner)
+
+        
+     if(whosturn>0){
+        $hitLocation.on('click',"*", attackComputer)
+            
+        }else 
+        if(whosturn<0) {
+            
+            attackHuman();
+        
+    }
+   
+    // if(turn>0){
+    //     $hitLocation.on('click',"*", attackComputer)
+    // }
+    // else {
+    //     attackHuman();
+    // }
+
+}
 
 
 
@@ -296,7 +481,7 @@ for(let i = 0; i <gameRatioX;i++){
                 break;
             
     };
-    $this.css("background-color" ,"#6EFA2C") 
+    $this.css("background-color" ,"#62BA39") 
        
 });
 
@@ -349,6 +534,7 @@ $shipLocation.find(`#row${i}`).on('mouseout',"*", function(e){
     }
 
     function countShips(ship){
+        
         if(ship==="cruiser"){
             
             shipCount[2]--;
@@ -382,6 +568,10 @@ $shipLocation.find(`#row${i}`).on('mouseout',"*", function(e){
             } else {
                 $("#aircraftcarriersLeft").text(`${0} aircraft carriers left `)
             }
+        }
+
+        if((checkSum(shipCount))===0){
+            play(1)
         }
         }
         
@@ -440,4 +630,3 @@ $shipLocation.find(`#row${i}`).on('click', function(e){
   
 });
 }
-
