@@ -223,7 +223,7 @@ function attackHuman (){
         console.log("Hits rendered" + hitsrendered)
         
         
-        if(playerBoard.board[rand]>0){
+        if(playerBoard.board[rand-1]>0){
             console.log("else if")
             playerBoard.board[rand]--;
             enemyHitTracker[rand]=1
@@ -234,7 +234,7 @@ function attackHuman (){
         } else {
             console.log("else")
             $shipLocation.find(`#${rand}`).css("background-color" ,"orange")
-            enemyHitTracker[rand]=1
+            enemyHitTracker[rand-1]=1
             hitsrendered++;
             hitCount++
         }
