@@ -112,9 +112,9 @@ function actionCardHandler(e){
 // $cardsButtons = $('#cardsbuttons')
 // $cardsButtons.on('click',"*",actionCardHandler)
 // console.log($cardsButtons)
-$actioncard1.on('click', actionCardHandler)
-$actioncard2.on('click', actionCardHandler)
-$actioncard3.on('click',actionCardHandler)
+// $actioncard1.on('click', actionCardHandler)
+// $actioncard2.on('click', actionCardHandler)
+// $actioncard3.on('click',actionCardHandler)
 
 function generateComputerdata  (){
     let placedCoordinates = []
@@ -211,6 +211,7 @@ function attackHuman (){
         } else {
             if((randomNumber(0,100) < 60) &&  (randomNumber(0,100) > 40)){
                 computerAttackOptions[2] = true;
+                $("#card-info").text(`Enemy is protected `)
             }
         }
         console.log("Hits rendered" + hitsrendered)
@@ -629,6 +630,9 @@ $shipLocation.find(`#row${i}`).on('mouseout',"*", function(e){
         }
 
         if((checkSum(shipCount))===0){
+            $actioncard1.on('click', actionCardHandler)
+    $actioncard2.on('click', actionCardHandler)
+    $actioncard3.on('click',actionCardHandler)
             play(1)
         }
         }
